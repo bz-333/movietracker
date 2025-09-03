@@ -1,0 +1,33 @@
+version: "3.0"
+services:
+  application:
+    container_name: movietracker-application
+    image: node:lts-alpine
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./code:/home/node/code
+    working_dir: /home/node/code/movietracker-application
+    depends_on:
+      - backend
+    environment:
+      - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+    tty: true
+    command: npm run dev
+  backend:
+    container_name: movietracker-backend
+    image: mongo:latest
+    restart: always
+    environment:
+      DB_NAME: movietracker
+      MONGO_INITDB_DATABASE: movietracker
+    ports:
+      - 27017:27017
+    volumes:
+      - ./.docker/movietracker-backend/seed-mongodb.js:/docker-entrypoint-initdb.d/seed-mongodb.js
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:
