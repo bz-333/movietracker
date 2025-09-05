@@ -1,7 +1,7 @@
 import Movies from "mongoose/movies/model";
 import { FilterWatchlistType, FilterMovieType } from "mongoose/movies/custom";
 import { MovieType } from "mongoose/movies/schema";
-import { ObjectId, QueryOptions } from "mongoose";
+import { Types, QueryOptions } from "mongoose";
 
 async function findMovies(
   filter: FilterMovieType | FilterWatchlistType | {}
@@ -21,9 +21,9 @@ export async function findAllMovies(): Promise<MovieType[] | []> {
 }
 
 export async function findMoviesById(
-  movie_ids: ObjectId[]
+  movie_ids: Types.ObjectId[]
 ): Promise<MovieType[] | []> {
-  let filter = { _id: movie_ids };
+  let filter = { _id: { $in: movie_ids } };
   return await findMovies(filter);
 }
 
@@ -39,7 +39,7 @@ export async function onUserWatchlist(
 }
 
 export async function updateWatchlist(
-  movie_id: ObjectId,
+  movie_id: Types.ObjectId,
   user_id: string,
   action: string
 ): Promise<MovieType | null | {}> {

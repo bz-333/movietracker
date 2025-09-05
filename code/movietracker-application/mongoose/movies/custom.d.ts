@@ -1,7 +1,7 @@
-import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
 
 export declare type FilterMovieType = {
-  location_id: ObjectId | ObjectId[];
+  _id: Types.ObjectId | { $in: Types.ObjectId[] };
 };
 
 export declare type FilterWatchlistType = {
