@@ -1,0 +1,12 @@
+.root {
+  display: inline-block;
+  height: 35px;
+  position: relative;
+  width: 122.5px;
+}
+@media (min-width: 600px) {
+  .root {
+    height: 50px;
+    width: 175px;
+  }
+}
