@@ -1,4 +1,4 @@
-import { ApolloServer } from "@apollo/server";
+import { ApolloServer, BaseContext } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 
 import { resolvers } from "graphql/resolvers";
@@ -7,14 +7,16 @@ import dbConnect from "middleware/db-connect";
 
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
-const server = new ApolloServer({
+import { getToken } from "next-auth/jwt";
+
+const server = new ApolloServer<BaseContext>({
   resolvers,
   typeDefs,
 });
 
 const handler = startServerAndCreateNextHandler(server, {
   context: async (req: NextApiRequest) => {
-    const token = {};
+    const token = await getToken({ req });
     return { token };
   },
 });

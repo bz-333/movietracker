@@ -19,7 +19,7 @@ const Movie: NextPage = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
   let movie: MovieType = JSON.parse(props.data?.movie);
-  let title = `The Food Finder - Details for ${movie?.name}`;
+  let title = `The Movie Tracker - Details for ${movie?.name}`;
 
   return (
     <div>
