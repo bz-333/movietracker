@@ -28,6 +28,19 @@ services:
     volumes:
       - ./.docker/movietracker-backend/seed-mongodb.js:/docker-entrypoint-initdb.d/seed-mongodb.js
       - mongodb_data_container:/data/db
+  jest:
+    container_name: movietracker-jest
+    image: node:lts-alpine
+    working_dir: /home/node/code/movietracker-application
+    volumes:
+      - ./code:/home/node/code
+    depends_on:
+      - backend
+      - application
+    environment:
+      - NODE_ENV=test
+    tty: true
+    command: "npm run testWatch"
 
 volumes:
   mongodb_data_container:
