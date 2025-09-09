@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Button from "components/button";
 import { Types } from "mongoose";
+import Image from "next/image";
 
 interface PropsInterface {
   movie: MovieType;
@@ -70,6 +71,18 @@ const MovieDetail = (props: PropsInterface): JSX.Element => {
     <div>
       {movie && (
         <ul className={styles.root}>
+          {(movie.thumbnail as string) && (
+            <Image
+              src={movie.thumbnail as string}
+              width={movie.thumbnail_width as number}
+              height={movie.thumbnail_height as number}
+              alt={"Thumbnail for " + (movie.title as string)}
+            />
+          )}
+          <li>
+            <b>Released in: </b>
+            {(movie.year as number).toString()}
+          </li>
           <li>
             <b>Cast: </b>
             {(movie.cast as string[]).join(", ")}

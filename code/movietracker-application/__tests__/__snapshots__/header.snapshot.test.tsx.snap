@@ -42,7 +42,7 @@ exports[`The Header component renders unchanged when logged in 1`] = `
             <a
               href="/list/rndmusr"
             >
-              Your watch list
+              Your watchlist
             </a>
           </span>
         </div>

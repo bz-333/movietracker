@@ -21,22 +21,22 @@ const List: NextPage = (
   const movies: MovieType[] = JSON.parse(props.data?.movies);
   const userId: string | undefined = props.data?.userId;
   const { data: session } = useSession();
-  let title = `The Movie Tracker - A personal watch list`;
+  let title = `The Movie Tracker - A personal watchlist`;
   let isCurrentUsers = userId && session?.user.fdlst_private_userId === userId;
   return (
     <div>
       <Head>
         <title>{title}</title>
-        content={`The Movie Tracker. A personal watch list.`}
+        content={`The Movie Tracker. A personal watchlist.`}
       </Head>
       <h1>
         {isCurrentUsers ? " Your " : " A "}
-        watch list!
+        watchlist!
       </h1>
       {isCurrentUsers && movies?.length === 0 && (
         <>
           <h2>Your list is currently empty! :(</h2>
-          <p>Start adding movies to your watch list!</p>
+          <p>Start adding movies to your watchlist!</p>
         </>
       )}
       <MoviesList movies={movies} />

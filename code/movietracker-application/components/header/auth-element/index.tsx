@@ -19,7 +19,7 @@ const AuthElement = (): JSX.Element => {
           <>
             <Button variant="outline">
               <Link href={`/list/${session?.user.fdlst_private_userId}`}>
-                Your watch list
+                Your watchlist
               </Link>
             </Button>
             <Button variant="blue" clickHandler={() => signOut()}>
